@@ -3,254 +3,354 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Serem — Full-Stack Developer, Cybersecurity & Agricultural Economics</title>
-    <meta name="description" content="Awadhi Serem — Full-Stack Developer with expertise in Cybersecurity and Agricultural Economics. Building robust, secure, and data-driven solutions." />
-    <meta name="theme-color" content="#06060b" />
+    <title>Serem | Full-Stack, Ag-Econ, CyberSec</title>
+    <meta name="description" content="Kevin Serem — Full-Stack Developer with expertise in Cybersecurity and Agricultural Economics. Building robust, secure, and data-driven solutions." />
+    <meta name="theme-color" content="#030308" />
+    <meta name="color-scheme" content="dark" />
 
     <!-- Open Graph -->
     <meta property="og:title" content="Serem — Full-Stack Developer Portfolio" />
     <meta property="og:description" content="Full-Stack Developer with expertise in Cybersecurity and Agricultural Economics." />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://serem8770-ux.github.io/Serem_portfolio/" />
+    <link rel="canonical" href="https://serem8770-ux.github.io/Serem_portfolio/" />
 
     <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='85' font-family='sans-serif'>S</text></svg>" />
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect rx='20' width='100' height='100' fill='%23030308'/%3E%3Ctext x='50' y='72' text-anchor='middle' font-size='70' font-weight='700' font-family='system-ui' fill='%2334d399'%3ES%3C/text%3E%3C/svg%3E" />
 
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <script type="module" crossorigin src="/Serem_portfolio/assets/index-0CXHzFn2.js"></script>
-    <link rel="stylesheet" crossorigin href="/Serem_portfolio/assets/index-Y4eKavtO.css">
+    <!-- Preload critical fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Kevin Serem",
+      "url": "https://serem8770-ux.github.io/Serem_portfolio/",
+      "jobTitle": "Full-Stack Developer",
+      "description": "Full-Stack Developer with expertise in Cybersecurity and Agricultural Economics",
+      "email": "serem8770@gmail.com",
+      "sameAs": [
+        "https://github.com/serem8770-ux",
+        "https://linkedin.com/in/kevin-serem"
+      ]
+    }
+    </script>
+    <script type="module" crossorigin src="/Serem_portfolio/assets/index-C43r_eed.js"></script>
+    <link rel="modulepreload" crossorigin href="/Serem_portfolio/assets/three-De1sv8eL.js">
+    <link rel="modulepreload" crossorigin href="/Serem_portfolio/assets/gsap-SFc2wnMY.js">
+    <link rel="stylesheet" crossorigin href="/Serem_portfolio/assets/index-ChkGZY7r.css">
   </head>
   <body>
 
-    <!-- Particle Canvas Background -->
-    <canvas id="particle-canvas"></canvas>
+    <!-- Skip to main content (accessibility) -->
+    <a href="#main" class="skip-link">Skip to main content</a>
+
+    <!-- Preloader -->
+    <div class="preloader" id="preloader" aria-hidden="true">
+      <div class="preloader-inner">
+        <div class="preloader-logo">S<span>.</span></div>
+        <div class="preloader-bar"><div class="preloader-progress" id="preloader-progress"></div></div>
+      </div>
+    </div>
+
+    <!-- Custom Cursor (desktop only) -->
+    <div class="cursor-dot" id="cursor-dot" aria-hidden="true"></div>
+    <div class="cursor-ring" id="cursor-ring" aria-hidden="true"></div>
+
+    <!-- Three.js Background Canvas -->
+    <canvas id="hero-canvas" aria-hidden="true"></canvas>
 
     <!-- Navbar -->
-    <nav class="navbar" id="navbar">
-      <div class="logo">Serem<span class="accent">.</span></div>
-      <div class="hamburger" id="hamburger" aria-label="Toggle menu">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-      <ul class="nav-links" id="nav-links">
+    <nav class="navbar" id="navbar" role="navigation" aria-label="Main navigation">
+      <a href="#home" class="logo" aria-label="Serem - Home">S<span class="accent">.</span></a>
+      <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-links">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links" id="nav-links" role="list">
         <li><a href="#about" class="nav-link">About</a></li>
         <li><a href="#expertise" class="nav-link">Expertise</a></li>
         <li><a href="#projects" class="nav-link">Projects</a></li>
-        <li><a href="#contact" class="btn-primary nav-link">Contact</a></li>
+        <li><a href="#contact" class="nav-link btn-nav">Contact</a></li>
       </ul>
       <div class="nav-overlay" id="nav-overlay"></div>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-      <div class="hero-content reveal">
-        <div class="badge">
-          <span class="pulse-dot"></span>
-          <span>Available for Opportunities</span>
-        </div>
-        <h1 class="title">Bridging Code, Security &amp;<br/><span class="highlight" id="typed-text"></span><span class="typing-cursor"></span></h1>
-        <p class="description">
-          A Full-Stack Developer with a keen interest in Cybersecurity and a deep foundation in Agricultural Economics. Building robust, secure, and data-driven solutions for tomorrow's challenges.
-        </p>
-        <div class="hero-cta">
-          <a href="#projects" class="btn-primary magnetic">Explore Work</a>
-          <a href="#contact" class="btn-secondary magnetic">Get in Touch</a>
-          <a href="https://github.com/serem8770-ux" target="_blank" rel="noopener" class="btn-secondary magnetic">GitHub ↗</a>
-          <a href="https://linkedin.com/in/awadhi-serem" target="_blank" rel="noopener" class="btn-secondary magnetic">LinkedIn ↗</a>
-        </div>
-      </div>
-      <!-- Decorative background elements -->
-      <div class="bg-glow glow-1"></div>
-      <div class="bg-glow glow-2"></div>
-      <div class="bg-glow glow-3"></div>
-    </section>
+    <main id="main">
 
-    <div class="section-divider"></div>
-
-    <!-- About Section -->
-    <section class="section" id="about">
-      <h2 class="section-title reveal">About <span class="accent">Me</span></h2>
-      <p class="section-subtitle reveal">A multidisciplinary professional at the intersection of technology and agriculture</p>
-
-      <div class="about-grid">
-        <div class="about-text reveal">
-          <h3>Who I Am</h3>
-          <p>
-            I'm Awadhi Serem — a passionate Full-Stack Developer from Kenya with a unique blend of software engineering, cybersecurity, and agricultural economics expertise. I build end-to-end web applications that are not only beautiful but also secure and performant.
+      <!-- ===================== HERO ===================== -->
+      <section class="hero" id="home">
+        <div class="hero-content">
+          <div class="badge">
+            <span class="pulse-dot"></span>
+            <span>Available for Opportunities</span>
+          </div>
+          <div class="hero-greeting">👋 Hello, human visitor</div>
+          <h1 class="hero-title">
+            Bridging Code,<br/>Security &amp;
+            <span class="gradient-text" id="typed-text"></span><span class="typing-cursor">|</span>
+          </h1>
+          <p class="hero-description">
+            Hey, I'm Kevin Serem. I build secure, high-performance web applications tailored to solve complex real-world problems. With deep roots in software engineering, cybersecurity, and agricultural economics, I bring a reliable human approach to precision code.
           </p>
-          <p>
-            My background in Agricultural Economics gives me a rare perspective on data-driven decision making, which I apply to every project — from fintech trading bots to ag-tech analytics platforms.
-          </p>
-          <div class="about-stats">
-            <div class="stat-item">
-              <span class="stat-number">3+</span>
-              <span class="stat-label">Years Coding</span>
+          <div class="hero-cta">
+            <a href="#projects" class="btn-primary" data-cursor="action">Explore Work</a>
+            <a href="#contact" class="btn-outline" data-cursor="action">Let's Chat</a>
+            <a href="https://github.com/serem8770-ux" target="_blank" rel="noopener noreferrer" class="btn-ghost" data-cursor="action">GitHub ↗</a>
+          </div>
+        </div>
+        <!-- Animated visual widgets -->
+        <div class="hero-widgets" aria-hidden="true">
+          <div class="widget-pill pill-1">
+            <span class="status-ring"></span>
+            <span class="widget-text">System Status: Live &amp; Secure</span>
+          </div>
+          <div class="widget-pill pill-2">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+            <span class="widget-text">Ag-Econ Logic Sync</span>
+          </div>
+        </div>
+        <!-- Decorative glows -->
+        <div class="bg-glow glow-1" aria-hidden="true"></div>
+        <div class="bg-glow glow-2" aria-hidden="true"></div>
+      </section>
+
+      <!-- ===================== ABOUT ===================== -->
+      <section class="section" id="about">
+        <div class="section-header">
+          <span class="section-tag">01 — About</span>
+          <h2 class="section-title">Who I <span class="accent">Am</span></h2>
+        </div>
+
+        <div class="about-grid">
+          <div class="about-visual-column">
+            <div class="avatar-frame" aria-hidden="true">
+              <div class="avatar-glow"></div>
+              <div class="avatar-inner">
+                <svg class="human-avatar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+              </div>
+              <div class="floating-badge badge-top">Full-Stack</div>
+              <div class="floating-badge badge-bottom">CyberSec</div>
             </div>
-            <div class="stat-item">
-              <span class="stat-number">10+</span>
-              <span class="stat-label">Projects</span>
+          </div>
+
+          <div class="about-text">
+            <p>I'm Kevin Serem — a passionate Full-Stack Developer from Kenya with a unique blend of software engineering, cybersecurity, and agricultural economics expertise.</p>
+            <p>I believe digital products work best when they connect elegant, understandable human interfaces with bulletproof architectural precision. My background in Ag-Econ allows me to integrate granular data workflows and statistical rigor into every application I architect.</p>
+            <div class="about-stats">
+              <div class="stat-item">
+                <span class="stat-number" data-count="3">0</span><span class="stat-suffix">+</span>
+                <span class="stat-label">Years Coding</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-number" data-count="10">0</span><span class="stat-suffix">+</span>
+                <span class="stat-label">Projects</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-number" data-count="3">0</span>
+                <span class="stat-label">Core Domains</span>
+              </div>
             </div>
-            <div class="stat-item">
-              <span class="stat-number">3</span>
-              <span class="stat-label">Domains</span>
+          </div>
+
+          <div class="skills-panel">
+            <h3>Tech Stack</h3>
+            <div class="tech-grid">
+              <div class="tech-item" data-cursor="hover">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg" alt="HTML5" width="32" height="32" loading="lazy" />
+                <span>HTML5</span>
+              </div>
+              <div class="tech-item" data-cursor="hover">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-original.svg" alt="CSS3" width="32" height="32" loading="lazy" />
+                <span>CSS3</span>
+              </div>
+              <div class="tech-item" data-cursor="hover">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg" alt="JavaScript" width="32" height="32" loading="lazy" />
+                <span>JavaScript</span>
+              </div>
+              <div class="tech-item" data-cursor="hover">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg" alt="React" width="32" height="32" loading="lazy" />
+                <span>React</span>
+              </div>
+              <div class="tech-item" data-cursor="hover">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg" alt="Node.js" width="32" height="32" loading="lazy" />
+                <span>Node.js</span>
+              </div>
+              <div class="tech-item" data-cursor="hover">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="Python" width="32" height="32" loading="lazy" />
+                <span>Python</span>
+              </div>
+              <div class="tech-item" data-cursor="hover">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg" alt="SQL" width="32" height="32" loading="lazy" />
+                <span>SQL</span>
+              </div>
+              <div class="tech-item" data-cursor="hover">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg" alt="Git" width="32" height="32" loading="lazy" />
+                <span>Git</span>
+              </div>
+              <div class="tech-item" data-cursor="hover">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/linux/linux-original.svg" alt="Linux" width="32" height="32" loading="lazy" />
+                <span>Linux</span>
+              </div>
+              <div class="tech-item" data-cursor="hover">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vitejs/vitejs-original.svg" alt="Vite" width="32" height="32" loading="lazy" />
+                <span>Vite</span>
+              </div>
+              <div class="tech-item" data-cursor="hover">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#34d399" stroke-width="1.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+                <span>Security</span>
+              </div>
+              <div class="tech-item" data-cursor="hover">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#fbbf24" stroke-width="1.5"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>
+                <span>Analytics</span>
+              </div>
             </div>
           </div>
         </div>
+      </section>
 
-        <div class="skills-panel reveal reveal-delay-1">
-          <h3>Tech Stack</h3>
-          <div class="tech-stack-grid">
-            <div class="tech-item">
-              <span class="tech-icon">🟧</span>
-              <span class="tech-name">HTML5</span>
+      <!-- ===================== EXPERTISE ===================== -->
+      <section class="section" id="expertise">
+        <div class="section-header">
+          <span class="section-tag">02 — Expertise</span>
+          <h2 class="section-title">What I <span class="accent">Do</span></h2>
+        </div>
+
+        <div class="expertise-grid">
+          <article class="expertise-card" data-cursor="hover">
+            <div class="card-icon">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/><line x1="14" y1="4" x2="10" y2="20"/></svg>
             </div>
-            <div class="tech-item">
-              <span class="tech-icon">🟦</span>
-              <span class="tech-name">CSS3</span>
+            <h3>Full-Stack Development</h3>
+            <p>Crafting responsive, high-performance web applications using modern frameworks, RESTful APIs, and scalable databases. From frontend pixel-perfection to backend architecture.</p>
+            <div class="card-tags">
+              <span>React</span><span>Node.js</span><span>APIs</span><span>SQL</span>
             </div>
-            <div class="tech-item">
-              <span class="tech-icon">🟨</span>
-              <span class="tech-name">JavaScript</span>
+          </article>
+          <article class="expertise-card" data-cursor="hover">
+            <div class="card-icon icon-blue">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
             </div>
-            <div class="tech-item">
-              <span class="tech-icon">⚛️</span>
-              <span class="tech-name">React</span>
+            <h3>Cybersecurity</h3>
+            <p>Integrating secure development lifecycle practices, assessing vulnerabilities, and writing hardened code to protect user data and critical infrastructure.</p>
+            <div class="card-tags">
+              <span>OWASP</span><span>Pen Testing</span><span>Encryption</span>
             </div>
-            <div class="tech-item">
-              <span class="tech-icon">🟢</span>
-              <span class="tech-name">Node.js</span>
+          </article>
+          <article class="expertise-card" data-cursor="hover">
+            <div class="card-icon icon-amber">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
             </div>
-            <div class="tech-item">
-              <span class="tech-icon">🐍</span>
-              <span class="tech-name">Python</span>
+            <h3>Agricultural Economics</h3>
+            <p>Applying data-driven insights to agribusiness logic, integrating complex financial forecasting models into ag-tech platforms for informed decision-making.</p>
+            <div class="card-tags">
+              <span>Data Analysis</span><span>Forecasting</span><span>Ag-Tech</span>
             </div>
-            <div class="tech-item">
-              <span class="tech-icon">🗄️</span>
-              <span class="tech-name">SQL</span>
+          </article>
+        </div>
+      </section>
+
+      <!-- ===================== PROJECTS ===================== -->
+      <section class="section" id="projects">
+        <div class="section-header">
+          <span class="section-tag">03 — Work</span>
+          <h2 class="section-title">Selected <span class="accent">Projects</span></h2>
+        </div>
+
+        <div class="projects-grid">
+          <!-- Project 1: Soy Resort -->
+          <article class="project-card" data-cursor="view">
+            <div class="project-image">
+              <img src="/Serem_portfolio/images/project-soy-resort.png" alt="Soy Resort Booking System - A premium resort website with integrated booking" loading="lazy" />
             </div>
-            <div class="tech-item">
-              <span class="tech-icon">🔀</span>
-              <span class="tech-name">Git</span>
+            <div class="project-content">
+              <span class="project-category">Full-Stack / Design</span>
+              <h3>Soy Resort Booking System</h3>
+              <p>A premium, organic-luxe resort website with an integrated CRM, booking modal, and immersive visual storytelling. Features real-time availability and a responsive design that captures the resort's identity.</p>
+              <div class="project-tech">
+                <span>HTML5</span><span>CSS3</span><span>JavaScript</span><span>Vite</span>
+              </div>
+              <div class="project-links">
+                <a href="https://github.com/serem8770-ux" target="_blank" rel="noopener noreferrer" class="btn-primary btn-sm">Live Demo ↗</a>
+                <a href="https://github.com/serem8770-ux" target="_blank" rel="noopener noreferrer" class="btn-outline btn-sm">Source ↗</a>
+              </div>
             </div>
-            <div class="tech-item">
-              <span class="tech-icon">🐧</span>
-              <span class="tech-name">Linux</span>
+          </article>
+
+          <!-- Project 2: Deriv Bot -->
+          <article class="project-card" data-cursor="view">
+            <div class="project-image">
+              <img src="/Serem_portfolio/images/project-deriv-bot.png" alt="Deriv Automated Trading Bot - Professional trading terminal with real-time API" loading="lazy" />
             </div>
-            <div class="tech-item">
-              <span class="tech-icon">⚡</span>
-              <span class="tech-name">Vite</span>
+            <div class="project-content">
+              <span class="project-category">FinTech / Algorithmic Trading</span>
+              <h3>Deriv Automated Trading Bot</h3>
+              <p>A professional web-based trading terminal featuring real-time API sync, automated strategies, and advanced risk management. Built for both demo and live market environments.</p>
+              <div class="project-tech">
+                <span>JavaScript</span><span>WebSocket</span><span>Deriv API</span><span>CSS3</span>
+              </div>
+              <div class="project-links">
+                <a href="https://github.com/serem8770-ux" target="_blank" rel="noopener noreferrer" class="btn-primary btn-sm">Live Demo ↗</a>
+                <a href="https://github.com/serem8770-ux" target="_blank" rel="noopener noreferrer" class="btn-outline btn-sm">Source ↗</a>
+              </div>
             </div>
-            <div class="tech-item">
-              <span class="tech-icon">🔒</span>
-              <span class="tech-name">Security</span>
+          </article>
+
+          <!-- Project 3: Yield Dashboard -->
+          <article class="project-card" data-cursor="view">
+            <div class="project-image">
+              <img src="/Serem_portfolio/images/project-yield-dashboard.png" alt="Yield Dashboard - Agricultural analytics platform with real-time data visualization" loading="lazy" />
             </div>
-            <div class="tech-item">
-              <span class="tech-icon">📊</span>
-              <span class="tech-name">Analytics</span>
+            <div class="project-content">
+              <span class="project-category">Ag-Tech / Data Analytics</span>
+              <h3>Yield Analytics Dashboard</h3>
+              <p>A data visualization platform for agricultural economics, charting crop performance against market indices in real time. Helps farmers and analysts make data-driven decisions.</p>
+              <div class="project-tech">
+                <span>Python</span><span>JavaScript</span><span>Chart.js</span><span>SQL</span>
+              </div>
+              <div class="project-links">
+                <a href="https://github.com/serem8770-ux" target="_blank" rel="noopener noreferrer" class="btn-primary btn-sm">Live Demo ↗</a>
+                <a href="https://github.com/serem8770-ux" target="_blank" rel="noopener noreferrer" class="btn-outline btn-sm">Source ↗</a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- ===================== CONTACT ===================== -->
+      <section class="section" id="contact">
+        <div class="contact-wrapper">
+          <div class="contact-box">
+            <span class="section-tag">04 — Contact</span>
+            <h2>Let's build something <span class="accent">game-changing.</span></h2>
+            <p>I'm currently available for full-time roles, freelance projects, and collaborations. Let's talk about what we can create together.</p>
+            <div class="contact-links">
+              <a href="mailto:serem8770@gmail.com" class="btn-primary btn-lg" data-cursor="action">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 4L12 13 2 4"/></svg>
+                Email Me
+              </a>
+              <a href="https://wa.me/254748968995" target="_blank" rel="noopener noreferrer" class="btn-outline btn-lg" data-cursor="action">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
+                WhatsApp
+              </a>
             </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <div class="section-divider"></div>
-
-    <!-- Expertise Section -->
-    <section class="expertise section" id="expertise">
-      <h2 class="section-title reveal">My <span class="accent">Expertise</span></h2>
-      <p class="section-subtitle reveal">Specialized skill sets that deliver real-world impact</p>
-      <div class="expertise-grid">
-        <div class="expertise-card reveal">
-          <div class="icon">💻</div>
-          <h3>Full-Stack Development</h3>
-          <p>Crafting responsive, high-performance web applications using modern frameworks, RESTful APIs, and scalable databases. From frontend pixel-perfection to backend architecture.</p>
-        </div>
-        <div class="expertise-card reveal reveal-delay-1">
-          <div class="icon">🛡️</div>
-          <h3>Cybersecurity</h3>
-          <p>Integrating secure development lifecycle practices, assessing vulnerabilities, and writing hardened code to protect user data and critical infrastructure.</p>
-        </div>
-        <div class="expertise-card reveal reveal-delay-2">
-          <div class="icon">🌾</div>
-          <h3>Agricultural Economics</h3>
-          <p>Applying data-driven insights to agribusiness logic, integrating complex financial forecasting models into ag-tech platforms for informed decision-making.</p>
-        </div>
-      </div>
-    </section>
-
-    <div class="section-divider"></div>
-
-    <!-- Projects Section -->
-    <section class="projects section" id="projects">
-      <h2 class="section-title reveal">Selected <span class="accent">Works</span></h2>
-      <p class="section-subtitle reveal">Real projects built with passion and precision</p>
-      <div class="projects-grid">
-        <!-- Project 1 -->
-        <article class="project-card reveal">
-          <div class="project-img-wrapper">
-            <div class="project-img bg-1"></div>
-          </div>
-          <div class="project-info">
-            <span class="project-tag">Full-Stack / Design</span>
-            <h3>Soy Resort Booking System</h3>
-            <p>A premium, organic-luxe resort website with an integrated CRM, booking modal, and immersive visual storytelling.</p>
-            <a href="https://github.com/serem8770-ux" target="_blank" rel="noopener" class="project-link">View Project →</a>
-          </div>
-        </article>
-        <!-- Project 2 -->
-        <article class="project-card reveal reveal-delay-1">
-          <div class="project-img-wrapper">
-            <div class="project-img bg-2"></div>
-          </div>
-          <div class="project-info">
-            <span class="project-tag">Algorithmic Trading / FinTech</span>
-            <h3>Deriv Automated Trading Bot</h3>
-            <p>A professional web-based trading terminal featuring real-time API sync, automated strategies, and advanced risk management.</p>
-            <a href="https://github.com/serem8770-ux" target="_blank" rel="noopener" class="project-link">View Project →</a>
-          </div>
-        </article>
-        <!-- Project 3 -->
-        <article class="project-card reveal reveal-delay-2">
-          <div class="project-img-wrapper">
-            <div class="project-img bg-3"></div>
-          </div>
-          <div class="project-info">
-            <span class="project-tag">Ag-Tech / Analytics</span>
-            <h3>Yield Dashboard</h3>
-            <p>A data visualization platform for agricultural economics, charting crop performance against market indices in real time.</p>
-            <a href="https://github.com/serem8770-ux" target="_blank" rel="noopener" class="project-link">View Project →</a>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <div class="section-divider"></div>
-
-    <!-- Contact Section -->
-    <section class="contact section" id="contact">
-      <div class="contact-wrapper">
-        <div class="contact-box reveal">
-          <h2>Let's build something <span class="accent">game-changing.</span></h2>
-          <p>I'm currently available for full-time roles, freelance projects, and collaborations.</p>
-          <div class="contact-links">
-            <a href="mailto:serem8770@gmail.com" class="btn-primary large">✉ Email Me</a>
-            <a href="https://wa.me/254748968995" target="_blank" rel="noopener" class="btn-secondary large">💬 WhatsApp</a>
-          </div>
-        </div>
-      </div>
-    </section>
+    </main>
 
     <!-- Footer -->
     <footer>
-      <p>© 2026 Serem. Crafted with precision.</p>
+      <p>&copy; 2026 Serem. Engineered with precision.</p>
       <div class="social-links">
-        <a href="https://github.com/serem8770-ux" target="_blank" rel="noopener">GitHub</a>
-        <a href="https://linkedin.com/in/awadhi-serem" target="_blank" rel="noopener">LinkedIn</a>
-        <a href="mailto:serem8770@gmail.com">Email</a>
+        <a href="https://github.com/serem8770-ux" target="_blank" rel="noopener noreferrer" aria-label="GitHub Profile">GitHub</a>
+        <a href="https://linkedin.com/in/kevin-serem" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Profile">LinkedIn</a>
+        <a href="mailto:serem8770@gmail.com" aria-label="Send Email">Email</a>
       </div>
     </footer>
 
