@@ -265,4 +265,5 @@ footer{text-align:center;padding:2.5rem 24px;border-top:1px solid var(--border);
   .tech-grid{grid-template-columns:repeat(3,1fr);gap:8px}
   .tech-item{padding:12px 4px}
   .about-stats{grid-template-columns:1fr 1fr 1fr}
+  .widget-pill{display:none} /* Prevent visual clutter/overlap on extremely narrow viewports */
 }
