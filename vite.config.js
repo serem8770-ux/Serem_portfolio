@@ -1,7 +1,7 @@
 import { defineConfig } from 'vite'
 
 export default defineConfig({
-  base: '/Serem_portfolio/',
+  base: './',
   build: {
     target: 'es2020',
     cssMinify: true,
