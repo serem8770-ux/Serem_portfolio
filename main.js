@@ -15,8 +15,12 @@ document.addEventListener('DOMContentLoaded', async () => {
   // 1. Show preloader while assets load
   document.body.style.overflow = 'hidden';
 
-  // 2. Initialize Three.js scene (renders behind preloader)
-  initHeroScene();
+  // 2. Initialize Three.js scene safely
+  try {
+    initHeroScene();
+  } catch (e) {
+    console.warn('Three.js scene skipped:', e);
+  }
 
   // 3. Wait for preloader to finish
   await initLoader();

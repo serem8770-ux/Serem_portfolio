@@ -9,25 +9,33 @@ export function initLoader() {
     const tick = () => {
       loaded += Math.random() * 15 + 5;
       if (loaded > 95) loaded = 95;
-      progress.style.width = loaded + '%';
+      if (progress) progress.style.width = loaded + '%';
     };
     const interval = setInterval(tick, 120);
 
+    let isFinished = false;
     const finish = () => {
+      if (isFinished) return;
+      isFinished = true;
       clearInterval(interval);
-      progress.style.width = '100%';
+      if (progress) progress.style.width = '100%';
       setTimeout(() => {
-        preloader.classList.add('done');
+        if (preloader) preloader.classList.add('done');
         document.body.style.overflow = '';
         resolve();
       }, 400);
     };
 
-    // Wait for fonts + small delay for Three.js init
+    // Absolute Failsafe timeout to guarantee preloader removal on any mobile browser
+    setTimeout(finish, 1500);
+
+    // Wait for fonts + small delay for UI rendering
     if (document.fonts && document.fonts.ready) {
-      document.fonts.ready.then(() => setTimeout(finish, 600));
+      document.fonts.ready
+        .then(() => setTimeout(finish, 600))
+        .catch(() => setTimeout(finish, 600));
     } else {
-      setTimeout(finish, 1200);
+      setTimeout(finish, 1000);
     }
   });
 }
