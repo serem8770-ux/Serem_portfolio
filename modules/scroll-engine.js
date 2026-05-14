@@ -1,135 +1,187 @@
-// GSAP ScrollTrigger — cinematic scroll-driven animations
+// GSAP ScrollTrigger Engine — Cinematic reveal timelines synchronized with smooth scrolling
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
 export function initScrollEngine(lenisInstance) {
-  // Sync Lenis with GSAP ScrollTrigger
+  // Seamlessly bind Lenis scroll progression to GSAP updates
   if (lenisInstance) {
     lenisInstance.on('scroll', ScrollTrigger.update);
   }
 
-  // Respect reduced motion preference
+  // Gracefully skip timeline construction if accessibility reduces motion
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (prefersReduced) return;
 
-  // Use set + scrollTrigger to avoid invisible-on-load issues
-  // Helper: reveal animation that starts hidden, becomes visible on scroll
-  function revealFrom(targets, fromVars, triggerEl) {
-    const trigger = triggerEl || targets;
-    gsap.set(targets, { opacity: 0, ...fromVars });
-    ScrollTrigger.create({
-      trigger: trigger,
-      start: 'top 88%',
-      once: true,
-      onEnter: () => {
-        gsap.to(targets, {
-          opacity: 1,
-          x: 0, y: 0, scale: 1,
-          duration: 0.9,
-          ease: 'power3.out',
-          stagger: fromVars.stagger || 0,
-          ...fromVars.toOverrides,
-        });
+  // --- Hero Section Staggered Entrance ---
+  gsap.fromTo('.hero-content', 
+    { opacity: 0, y: 40 },
+    { opacity: 1, y: 0, duration: 1.2, ease: 'power3.out', delay: 0.5 }
+  );
+
+  // --- Section Headers Reveal ---
+  gsap.utils.toArray('.section-header').forEach((header) => {
+    gsap.fromTo(header.children,
+      { opacity: 0, y: 30 },
+      {
+        opacity: 1,
+        y: 0,
+        stagger: 0.15,
+        duration: 0.85,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: header,
+          start: 'top 86%',
+          once: true,
+        }
       }
-    });
+    );
+  });
+
+  // --- About Philosophy Column Reveal ---
+  const aboutVisual = document.querySelector('.about-visual-column');
+  if (aboutVisual) {
+    gsap.fromTo(aboutVisual,
+      { opacity: 0, x: -50, scale: 0.95 },
+      {
+        opacity: 1,
+        x: 0,
+        scale: 1,
+        duration: 1.0,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: aboutVisual,
+          start: 'top 85%',
+          once: true,
+        }
+      }
+    );
   }
 
-  // Hero entrance (immediate, no scroll trigger needed)
-  gsap.from('.hero-content', {
-    opacity: 0, y: 50, duration: 1, ease: 'power3.out', delay: 0.6
-  });
-
-  // Section headers
-  gsap.utils.toArray('.section-header').forEach((header) => {
-    gsap.set(header.children, { opacity: 0, y: 25 });
-    ScrollTrigger.create({
-      trigger: header,
-      start: 'top 88%',
-      once: true,
-      onEnter: () => {
-        gsap.to(header.children, {
-          opacity: 1, y: 0, stagger: 0.12, duration: 0.7, ease: 'power3.out'
-        });
-      }
-    });
-  });
-
-  // About text
   const aboutText = document.querySelector('.about-text');
   if (aboutText) {
-    gsap.set(aboutText, { opacity: 0, x: -30 });
-    ScrollTrigger.create({
-      trigger: aboutText, start: 'top 85%', once: true,
-      onEnter: () => gsap.to(aboutText, { opacity: 1, x: 0, duration: 0.8, ease: 'power3.out' })
-    });
+    gsap.fromTo(aboutText.children,
+      { opacity: 0, x: 40 },
+      {
+        opacity: 1,
+        x: 0,
+        stagger: 0.15,
+        duration: 0.9,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: aboutText,
+          start: 'top 85%',
+          once: true,
+        }
+      }
+    );
   }
 
-  // Skills panel
-  const skillsPanel = document.querySelector('.skills-panel');
-  if (skillsPanel) {
-    gsap.set(skillsPanel, { opacity: 0, x: 30 });
-    ScrollTrigger.create({
-      trigger: skillsPanel, start: 'top 85%', once: true,
-      onEnter: () => gsap.to(skillsPanel, { opacity: 1, x: 0, duration: 0.8, ease: 'power3.out', delay: 0.15 })
-    });
-  }
-
-  // Tech items
+  // --- Tech Stack Flow Grid ---
   const techItems = gsap.utils.toArray('.tech-item');
   if (techItems.length) {
-    gsap.set(techItems, { opacity: 0, y: 15, scale: 0.92 });
-    ScrollTrigger.create({
-      trigger: '.tech-grid', start: 'top 88%', once: true,
-      onEnter: () => gsap.to(techItems, { opacity: 1, y: 0, scale: 1, stagger: 0.04, duration: 0.45, ease: 'power2.out' })
-    });
+    gsap.fromTo(techItems,
+      { opacity: 0, y: 20, scale: 0.9 },
+      {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        stagger: 0.03,
+        duration: 0.5,
+        ease: 'back.out(1.4)',
+        scrollTrigger: {
+          trigger: '.tech-grid',
+          start: 'top 88%',
+          once: true,
+        }
+      }
+    );
   }
 
-  // Stat counters
-  document.querySelectorAll('.stat-number[data-count]').forEach((el) => {
-    const target = parseInt(el.dataset.count, 10);
+  // --- Statistical Counters Animation ---
+  document.querySelectorAll('.stat-number[data-count]').forEach((element) => {
+    const endValue = parseInt(element.dataset.count, 10);
+    
     ScrollTrigger.create({
-      trigger: el, start: 'top 92%', once: true,
+      trigger: element,
+      start: 'top 92%',
+      once: true,
       onEnter: () => {
         gsap.to({ val: 0 }, {
-          val: target, duration: 1.5, ease: 'power2.out',
-          onUpdate() { el.textContent = Math.round(this.targets()[0].val); }
+          val: endValue,
+          duration: 2.0,
+          ease: 'power2.out',
+          onUpdate() {
+            element.textContent = Math.round(this.targets()[0].val);
+          }
         });
       }
     });
   });
 
-  // Expertise cards
+  // --- Core Domain Expertise Cards ---
   const expertiseCards = gsap.utils.toArray('.expertise-card');
   if (expertiseCards.length) {
-    gsap.set(expertiseCards, { opacity: 0, y: 40 });
-    ScrollTrigger.create({
-      trigger: '.expertise-grid', start: 'top 85%', once: true,
-      onEnter: () => gsap.to(expertiseCards, { opacity: 1, y: 0, stagger: 0.12, duration: 0.8, ease: 'power3.out' })
-    });
+    gsap.fromTo(expertiseCards,
+      { opacity: 0, y: 50 },
+      {
+        opacity: 1,
+        y: 0,
+        stagger: 0.2,
+        duration: 0.9,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: '.expertise-grid',
+          start: 'top 85%',
+          once: true,
+        }
+      }
+    );
   }
 
-  // Project cards
+  // --- Premium Project Showcases ---
   const projectCards = gsap.utils.toArray('.project-card');
   if (projectCards.length) {
-    gsap.set(projectCards, { opacity: 0, y: 50 });
-    ScrollTrigger.create({
-      trigger: '.projects-grid', start: 'top 85%', once: true,
-      onEnter: () => gsap.to(projectCards, { opacity: 1, y: 0, stagger: 0.15, duration: 0.8, ease: 'power3.out' })
-    });
+    gsap.fromTo(projectCards,
+      { opacity: 0, y: 60 },
+      {
+        opacity: 1,
+        y: 0,
+        stagger: 0.25,
+        duration: 1.0,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: '.projects-grid',
+          start: 'top 84%',
+          once: true,
+        }
+      }
+    );
   }
 
-  // Contact box
+  // --- Global Contact Center Reveal ---
   const contactBox = document.querySelector('.contact-box');
   if (contactBox) {
-    gsap.set(contactBox, { opacity: 0, y: 30 });
-    ScrollTrigger.create({
-      trigger: contactBox, start: 'top 88%', once: true,
-      onEnter: () => gsap.to(contactBox, { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' })
-    });
+    gsap.fromTo(contactBox,
+      { opacity: 0, scale: 0.96, y: 40 },
+      {
+        opacity: 1,
+        scale: 1,
+        y: 0,
+        duration: 1.0,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: contactBox,
+          start: 'top 86%',
+          once: true,
+        }
+      }
+    );
   }
 
-  // Refresh ScrollTrigger after all is set up
-  ScrollTrigger.refresh();
+  // Final synchronization calculation refresh
+  setTimeout(() => {
+    ScrollTrigger.refresh();
+  }, 600);
 }

@@ -1,6 +1,6 @@
 // ============================================================
-//  Serem Portfolio — Main Orchestrator
-//  Imports and initializes all modules in the correct order
+//  Kevin Serem Portfolio — Master Orchestrator
+//  Synchronizes all logic layers, Three.js 3D capabilities, and animations
 // ============================================================
 import Lenis from 'lenis';
 import 'lenis/dist/lenis.css';
@@ -12,39 +12,59 @@ import { initCursor } from './modules/cursor.js';
 import { initTyping } from './modules/typing.js';
 
 document.addEventListener('DOMContentLoaded', async () => {
-  // 1. Show preloader while assets load
-  document.body.style.overflow = 'hidden';
-
-  // 2. Initialize Three.js scene safely
+  // 1. Initialize Three.js 3D capabilities safely (non-blocking)
+  let isThreeActive = false;
   try {
-    initHeroScene();
-  } catch (e) {
-    console.warn('Three.js scene skipped:', e);
+    isThreeActive = initHeroScene();
+  } catch (error) {
+    console.warn('Three.js skipped:', error);
   }
 
-  // 3. Wait for preloader to finish
-  await initLoader();
+  // 2. Await completion of preloading screen
+  try {
+    await initLoader();
+  } catch (loaderError) {
+    // Force-dismiss preloader if loader itself throws
+    const el = document.getElementById('preloader');
+    if (el) el.classList.add('done');
+    document.body.style.overflow = '';
+  }
 
-  // 4. Initialize smooth scrolling
+  // 3. Instantiate cinematic smooth scroll (skip on mobile/reduced motion)
   let lenis = null;
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (!prefersReduced) {
-    lenis = new Lenis({
-      duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      smoothWheel: true,
-    });
 
-    function raf(time) {
-      lenis.raf(time);
+  if (!prefersReduced) {
+    try {
+      lenis = new Lenis({
+        duration: 1.3,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        smoothWheel: true,
+        wheelMultiplier: 1.05,
+        touchMultiplier: 2,
+      });
+
+      function raf(time) {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
+      }
       requestAnimationFrame(raf);
+    } catch (lenisError) {
+      console.warn('Smooth scroll skipped:', lenisError);
     }
-    requestAnimationFrame(raf);
   }
 
-  // 5. Initialize all modules
-  initNav();
-  initTyping();
-  initScrollEngine(lenis);
-  initCursor();
+  // 4. Initialize all interactive subsystems — each wrapped to prevent cascade failure
+  try { initNav(); } catch (e) { console.warn('Nav skipped:', e); }
+  try { initTyping(); } catch (e) { console.warn('Typing skipped:', e); }
+  try { initScrollEngine(lenis); } catch (e) { console.warn('ScrollEngine skipped:', e); }
+  try { initCursor(); } catch (e) { console.warn('Cursor skipped:', e); }
+
+  // QA inspection hook
+  window.__SEREM_APP_STATE__ = {
+    threeInitialized: !!isThreeActive,
+    smoothScrollActive: !!lenis,
+    reducedMotion: prefersReduced,
+    timestamp: new Date().toISOString()
+  };
 });
