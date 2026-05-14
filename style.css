@@ -1077,6 +1077,13 @@ body.cursor-ready .cursor-dot, body.cursor-ready .cursor-ring {
   overflow: hidden;
   height: 240px;
   position: relative;
+  background: linear-gradient(110deg, var(--bg-elevated) 30%, var(--bg-surface) 50%, var(--bg-elevated) 70%);
+  background-size: 200% 100%;
+  animation: shimmer-load 1.5s ease-in-out infinite;
+}
+@keyframes shimmer-load {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
 }
 .project-image::after {
   content: '';
@@ -1085,14 +1092,35 @@ body.cursor-ready .cursor-dot, body.cursor-ready .cursor-ring {
   background: linear-gradient(to top, var(--bg-void), transparent 70%);
   pointer-events: none;
 }
+/* Scan-line hover effect */
+.project-image::before {
+  content: '';
+  position: absolute;
+  top: -100%;
+  left: 0;
+  right: 0;
+  height: 60%;
+  background: linear-gradient(to bottom, transparent, rgba(var(--accent-rgb), 0.06), transparent);
+  z-index: 1;
+  transition: top 0.8s var(--ease);
+  pointer-events: none;
+}
+.project-card:hover .project-image::before {
+  top: 100%;
+}
 .project-image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.7s var(--ease);
+  object-position: top;
+  transition: transform 0.7s var(--ease), filter 0.5s;
+}
+.project-image img[loading] {
+  animation: none; /* Stop shimmer once image loads */
 }
 .project-card:hover .project-image img {
   transform: scale(1.08);
+  filter: brightness(1.1);
 }
 .project-content {
   padding: 2.5rem;
