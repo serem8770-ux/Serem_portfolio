@@ -1204,21 +1204,7 @@ footer {
 }
 
 /* ======================== GSAP ANIMATION STATES ======================== */
-.gs-reveal {
-  opacity: 0;
-  transform: translateY(40px);
-  will-change: transform, opacity;
-}
-.gs-reveal-left {
-  opacity: 0;
-  transform: translateX(-40px);
-  will-change: transform, opacity;
-}
-.gs-reveal-right {
-  opacity: 0;
-  transform: translateX(40px);
-  will-change: transform, opacity;
-}
+/* GSAP animation states handled entirely via inline styles by fromTo — no CSS pre-hiding */
 
 /* ======================== NAV OVERLAY ======================== */
 .nav-overlay {
