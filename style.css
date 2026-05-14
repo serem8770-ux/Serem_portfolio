@@ -331,7 +331,7 @@ body.cursor-ready .cursor-dot, body.cursor-ready .cursor-ring {
   width: 100%;
   height: 100%;
   z-index: 0;
-  pointer-events: auto; /* Allow raycasting events directly on canvas */
+  pointer-events: none; /* CRITICAL: must be none so clicks reach hamburger/buttons */
 }
 
 /* ======================== NAVBAR ======================== */
@@ -733,7 +733,25 @@ body.cursor-ready .cursor-dot, body.cursor-ready .cursor-ring {
   margin: 0 auto;
   position: relative;
   z-index: 2;
+  background: var(--bg-void);
 }
+
+/* Flowing gradient dividers between sections */
+.section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 10%;
+  right: 10%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border-highlight), transparent);
+}
+
+/* Section-specific accent glow backgrounds */
+#about { background: linear-gradient(180deg, var(--bg-void) 0%, rgba(52, 211, 153, 0.015) 50%, var(--bg-void) 100%); }
+#expertise { background: linear-gradient(180deg, var(--bg-void) 0%, rgba(129, 140, 248, 0.015) 50%, var(--bg-void) 100%); }
+#projects { background: linear-gradient(180deg, var(--bg-void) 0%, rgba(251, 191, 36, 0.015) 50%, var(--bg-void) 100%); }
+#contact { background: linear-gradient(180deg, var(--bg-void) 0%, rgba(52, 211, 153, 0.02) 50%, var(--bg-void) 100%); }
 .section-header {
   text-align: center;
   margin-bottom: 4.5rem;
@@ -1178,7 +1196,6 @@ body.cursor-ready .cursor-dot, body.cursor-ready .cursor-ring {
 footer {
   text-align: center;
   padding: 3rem 24px;
-  border-top: 1px solid var(--border);
   color: var(--text-tertiary);
   display: flex;
   justify-content: space-between;
@@ -1188,6 +1205,16 @@ footer {
   font-size: 0.9rem;
   position: relative;
   z-index: 2;
+  background: var(--bg-void);
+}
+footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent), var(--accent-secondary), transparent);
 }
 .social-links {
   display: flex;
@@ -1201,6 +1228,101 @@ footer {
 .social-links a:hover {
   color: var(--accent);
   transform: translateY(-2px);
+}
+
+/* ======================== SCROLL INDICATOR ======================== */
+.scroll-indicator {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-tertiary);
+  font-size: 0.7rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  animation: scroll-bounce 2.5s infinite;
+}
+.scroll-indicator .scroll-line {
+  width: 1px;
+  height: 40px;
+  background: linear-gradient(to bottom, var(--accent), transparent);
+}
+@keyframes scroll-bounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); opacity: 1; }
+  50% { transform: translateX(-50%) translateY(12px); opacity: 0.4; }
+}
+
+/* ======================== AVATAR PHOTO ======================== */
+.avatar-photo {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(var(--accent-rgb), 0.3);
+  box-shadow: 0 0 30px rgba(var(--accent-rgb), 0.15);
+  transition: transform 0.5s var(--ease-spring), box-shadow 0.5s;
+}
+.avatar-frame:hover .avatar-photo {
+  transform: scale(1.08);
+  box-shadow: 0 0 40px rgba(var(--accent-rgb), 0.3);
+}
+
+/* ======================== CARD 3D TILT ======================== */
+.expertise-card, .project-card {
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+.expertise-card:hover {
+  transform: translateY(-8px) rotateX(2deg) rotateY(-2deg);
+}
+.project-card:hover {
+  transform: translateY(-10px) rotateX(1deg) rotateY(-1deg);
+}
+
+/* ======================== PERSONALITY SECTION ======================== */
+.personality-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-top: 2rem;
+}
+.personality-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  border-radius: var(--radius-md);
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  transition: all 0.3s var(--ease);
+}
+.personality-item:hover {
+  border-color: var(--border-accent);
+  transform: translateY(-2px);
+}
+.personality-item .emoji {
+  font-size: 1.4rem;
+}
+.personality-item .info {
+  display: flex;
+  flex-direction: column;
+}
+.personality-item .info-label {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-tertiary);
+}
+.personality-item .info-value {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-primary);
 }
 
 /* ======================== GSAP ANIMATION STATES ======================== */
@@ -1319,16 +1441,7 @@ footer {
     gap: 1.5rem;
   }
   .widget-pill {
-    transform: scale(0.85);
-    padding: 8px 14px;
-  }
-  .pill-1 {
-    top: 12%;
-    left: 2%;
-  }
-  .pill-2 {
-    bottom: 14%;
-    right: 2%;
+    display: none; /* Hide on mobile to prevent overlap with hero content */
   }
   .avatar-frame {
     width: 250px;
@@ -1348,10 +1461,13 @@ footer {
   .about-stats {
     grid-template-columns: 1fr;
   }
-  .widget-pill {
-    display: none; /* Keep clean canvas real estate on narrow screens */
-  }
   .contact-box {
     padding: 2.5rem 1.5rem;
+  }
+  .personality-grid {
+    grid-template-columns: 1fr;
+  }
+  .scroll-indicator {
+    bottom: 20px;
   }
 }
